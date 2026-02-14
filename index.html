@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 ZerModzTeam 🔥</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background:black; color:white; overflow-x:hidden;
+        }
+
+        /* ================= OPENING MATA (LURUS & CLEAN) ================= */
+        .intro-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; display: flex; justify-content: center; align-items: center;
+            z-index: 9999; animation: introFade 0.5s forwards 4s;
+        }
+        .eye-base {
+            position: relative; width: 250px; height: 120px; background: #eee;
+            border-radius: 100% 15%; display: flex; justify-content: center; align-items: center;
+            overflow: hidden; border: 4px solid #333; box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            animation: blinkAction 0.8s infinite 0.5s, eyeRedden 1s forwards 2s, eyeExplode 0.8s forwards 3.2s;
+        }
+        .iris {
+            width: 90px; height: 90px;
+            background: radial-gradient(circle, #000 25%, #00ff99 60%, #008855 100%);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            animation: irisRedden 1s forwards 2s;
+        }
+        .pupil { width: 35px; height: 35px; background: black; border-radius: 50%; }
+
+        @keyframes blinkAction { 0%, 90%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.01); } }
+        @keyframes eyeRedden { 100% { background: #500; border-color: #f00; box-shadow: 0 0 60px #f00; } }
+        @keyframes irisRedden { 100% { background: radial-gradient(circle, #000 25%, #ff0000 60%, #800000 100%); } }
+        @keyframes eyeExplode { 0% { transform: scale(1); } 100% { transform: scale(45); opacity: 0; filter: blur(50px); } }
+        @keyframes introFade { 100% { opacity: 0; visibility: hidden; } }
+
+        /* ================= UI CONTENT ================= */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .header-section { text-align: center; padding: 40px 10px; }
+        h1 { color: #00ff99; font-size: 35px; text-shadow: 0 0 20px #00ff99; margin-bottom: 25px; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .main-btn {
+            background: linear-gradient(45deg, #00ff99, #00ffff); color: black;
+            border: none; padding: 14px 30px; border-radius: 50px; cursor: pointer;
+            font-weight: 900; font-size: 13px; box-shadow: 0 0 20px rgba(0, 255, 153, 0.4); transition: 0.3s;
+        }
+        .main-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #00ffff; }
+
+        /* MODAL */
+        .modal {
+            display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            background: #0a0a0a; margin: 15% auto; padding: 30px; border: 2px solid #00ff99;
+            width: 85%; max-width: 380px; border-radius: 25px; text-align: center; box-shadow: 0 0 40px #00ff99;
+        }
+        .menu-option {
+            display: block; background: #1a1a1a; color: #00ff99; text-decoration: none;
+            padding: 15px; margin: 12px 0; border-radius: 50px; font-weight: bold; border: 1px solid #333; transition: 0.3s;
+        }
+        .menu-option:hover { background: #00ff99; color: black; transform: translateX(5px); }
+
+        /* CARDS */
+        .container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; gap: 20px; }
+        .card {
+            background: rgba(15, 15, 15, 0.95); border: 1px solid #00ff99; border-radius: 25px;
+            padding: 20px; width: 340px; opacity: 0; transform: translateY(40px); transition: 0.6s ease-out;
+        }
+        .card.show { opacity: 1; transform: translateY(0); }
+        .card h2 { color: #00ff99; margin-bottom: 5px; font-size: 24px; }
+        .card p.needed { font-size: 12px; color: #00ffff; margin-bottom: 15px; font-weight: bold; }
+        .option-item { background: #000; margin: 8px 0; padding: 12px; border-radius: 15px; border: 1px solid #222; font-size: 14px; }
+        
+        .order-btn {
+            width: 100%; padding: 12px; margin-top: 8px;
+            background: #00ff99; border: none; border-radius: 30px; 
+            font-weight: 900; color: black; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .order-btn:hover { background: #fff; box-shadow: 0 0 20px #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="intro-layer">
+        <div class="eye-base"><div class="iris"><div class="pupil"></div></div></div>
+    </div>
+
+    <canvas id="stars"></canvas>
+
+    <div class="header-section">
+        <h1>🔥 ZerModzTeam 🔥</h1>
+        <div class="btn-group">
+            <button class="main-btn" onclick="openModal('csModal')">🎧 CUSTOMER SERVICE</button>
+            <button class="main-btn" onclick="openModal('sosmedModal')">🌐 SOCIAL MEDIA</button>
+        </div>
+    </div>
+
+    <div id="csModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:#00ff99; margin-bottom: 15px;">HUBUNGI KAMI</h2>
+            <a href="https://wa.me/6285721057014?text=Halo%20kak%20saya%20butuh%20bantuan" target="_blank" class="menu-option">OWNER (RENDY)</a>
+            <a href="https://wa.me/6289653938936?text=Halo%20kak%20saya%20butuh%20bantuan" target="_blank" class="menu-option">ADMIN (ZERO)</a>
+            <button onclick="closeModal('csModal')" style="background:transparent; color:#888; border:none; cursor:pointer; margin-top:15px; font-weight:bold;">[ TUTUP ]</button>
+        </div>
+    </div>
+
+    <div id="sosmedModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:#00ff99; margin-bottom: 15px;">SOCIAL MEDIA</h2>
+            <a href="https://www.instagram.com/zeroxit44?igsh=YXVkNHR0amRpNnN4" target="_blank" class="menu-option">INSTAGRAM</a>
+            <a href="https://tiktok.com/@zaraxitnd" target="_blank" class="menu-option">TIKTOK</a>
+            <a href="https://www.youtube.com/@ZMTEAM0" target="_blank" class="menu-option">YOUTUBE</a>
+            <a href="https://whatsapp.com/channel/0029Vb7alZSChq6OsnwMSk0k" target="_blank" class="menu-option">SALURAN TESTI</a>
+            <button onclick="closeModal('sosmedModal')" style="background:transparent; color:#888; border:none; cursor:pointer; margin-top:15px; font-weight:bold;">[ TUTUP ]</button>
+        </div>
+    </div>
+
+    <div class="container" id="productContainer"></div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+        window.onclick = function(event) { if (event.target.className === "modal") event.target.style.display = "none"; }
+
+        const canvas = document.getElementById("stars");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let stars = Array(150).fill().map(() => ({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2 }));
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle = "white";
+            stars.forEach(st => { ctx.beginPath(); ctx.arc(st.x, st.y, st.s, 0, Math.PI*2); ctx.fill(); st.y += 0.3; if(st.y > canvas.height) st.y = 0; });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        const products = [
+            { name:"BR M0DS", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"25K/$2", d:"3 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"80K/$5", d:"10 Day"}, {p:"150K/$10", d:"30 Day"}]},
+            { name:"HEX BLADE", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"BLOODSTRIKE APKMOD", need:"No Root", options:[{p:"20K/$1.5", d:"1 Day"}, {p:"50K/$4", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"130K/$11", d:"30 Day"}]},
+            { name:"BLOODSTRIKE LIXYNSO", need:"No Root", options:[{p:"40K/$4", d:"7 Day"}, {p:"70K/$5", d:"14 Day"}, {p:"120K/$11", d:"30 Day"}]},
+            { name:"STRICKS BR", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"25K/$2", d:"3 Day"}, {p:"50K/$4", d:"7 Day"}, {p:"80K/$5", d:"10 Day"}, {p:"150K/$10", d:"30 Day"}]},
+            { name:"LKTEAM", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"REAPER X PRO", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"EAGLE CHEATS", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"PUBG CFAIRLY", need:"Root", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"BEYOND CHEATS", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"ELEVEN AND XTFFHX", need:"Root", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"EVO CHEATS", need:"Root / Virtual", options:[{p:"15K/$1", d:"1 Day"}, {p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]},
+            { name:"PUBGM USERCHEAT", need:"Root / Virtual", options:[{p:"50K/$5", d:"7 Day"}, {p:"100K/$8", d:"14 Day"}, {p:"140K/$12", d:"30 Day"}]}
+        ];
+
+        const container = document.getElementById("productContainer");
+        products.forEach((p, i) => {
+            let card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `<h2>${p.name}</h2><p class="needed">NEEDED: ${p.need}</p>`;
+            p.options.forEach(opt => {
+                let div = document.createElement("div");
+                div.className = "option-item";
+                let message = `Bg beli ${p.name} - Harga: ${opt.p} - ${p.need} - Durasi: ${opt.d}`;
+                div.innerHTML = `Harga: ${opt.p} | Durasi: ${opt.d}<br><button class="order-btn" onclick="window.open('https://wa.me/6285721057014?text=${encodeURIComponent(message)}')">[ ORDER VIA WA ]</button>`;
+                card.appendChild(div);
+            });
+            container.appendChild(card);
+            setTimeout(() => card.classList.add("show"), 4200 + (i * 100));
+        });
+    </script>
+</body>
+</html>
