@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 ZerModzTeam 🔥</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, sans-serif;
+background:black;
+color:white;
+overflow-x:hidden;
+}
+
+/* INTRO SCREEN */
+#intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+animation:fadeOut 1.5s ease forwards;
+animation-delay:2.5s;
+}
+
+.intro-text{
+font-size:40px;
+color:#00ff99;
+letter-spacing:4px;
+text-shadow:0 0 20px #00ff99;
+animation:glitch 1s infinite;
+}
+
+@keyframes glitch{
+0%{transform:translate(0);}
+20%{transform:translate(-2px,2px);}
+40%{transform:translate(2px,-2px);}
+60%{transform:translate(-1px,1px);}
+80%{transform:translate(1px,-1px);}
+100%{transform:translate(0);}
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+/* STAR CANVAS */
+canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* TITLE */
+h1{
+text-align:center;
+padding:20px;
+color:#00ff99;
+font-size:28px;
+text-shadow:0 0 10px #00ff99,
+             0 0 20px #00ff99,
+             0 0 40px #00ff99;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 10px #00ff99; }
+to{
+text-shadow:0 0 20px #00ff99,
+             0 0 40px #00ff99;
+}
+}
+
+/* CONTAINER */
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+padding:20px;
+gap:15px;
+}
+
+/* CARD */
+.card{
+background:rgba(20,20,20,0.85);
+border:1px solid #00ff99;
+border-radius:15px;
+padding:15px;
+width:300px;
+box-shadow:0 0 10px #00ff99;
+backdrop-filter:blur(8px);
+
+opacity:0;
+transform:translateY(40px) scale(0.95);
+transition:all 0.6s ease;
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+
+.card:hover{
+transform:translateY(-5px) scale(1.02);
+box-shadow:0 0 20px #00ff99;
+}
+
+.card h2{
+color:#00ff99;
+margin-bottom:8px;
+font-size:18px;
+}
+
+.card p{
+font-size:14px;
+margin-bottom:8px;
+color:#ccc;
+}
+
+/* OPTION */
+.option{
+background:#111;
+margin:8px 0;
+padding:10px;
+border-radius:8px;
+border:1px solid #222;
+transition:0.3s;
+}
+
+.option:hover{
+border-color:#00ff99;
+}
+
+/* BUTTON */
+button{
+margin-top:8px;
+padding:8px 15px;
+border:none;
+background:#00ff99;
+color:black;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#00cc77;
+transform:scale(1.05);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.card{
+width:90%;
+}
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-text">ZerXiterz</div>
+</div>
+
+<canvas id="stars"></canvas>
+
+<h1>🔥 ZerModzTeam 🔥</h1>
+<div class="container" id="productContainer"></div>
+
+<script>
+/* ===============================
+   STAR BACKGROUND + GYRO
+================================= */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let stars = [];
+let starCount = 200;
+let offsetX = 0;
+let offsetY = 0;
+
+for(let i=0;i<starCount;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2,
+speed:Math.random()*0.5
+});
+}
+
+function drawStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+stars.forEach(star=>{
+ctx.beginPath();
+ctx.arc(star.x+offsetX, star.y+offsetY, star.size, 0, Math.PI*2);
+ctx.fillStyle="white";
+ctx.fill();
+
+star.y += star.speed;
+if(star.y > canvas.height){
+star.y = 0;
+star.x = Math.random()*canvas.width;
+}
+});
+
+requestAnimationFrame(drawStars);
+}
+
+drawStars();
+
+/* GYRO */
+if(window.DeviceOrientationEvent){
+window.addEventListener("deviceorientation", function(event){
+offsetX = event.gamma * 0.5;
+offsetY = event.beta * 0.2;
+});
+}
+
+/* ===============================
+   PRODUCT LIST
+================================= */
+
+const nomorWA = "6285721057014";
+
+const products = [
+{
+name:"BR M0DS",
+need:"Root / Virtual",
+options:["Rp 15K - 1 Day","Rp 25K - 3 Day","Rp 50K - 7 Day","Rp 80K - 10 Day","Rp 150K - 30 Day"]
+},
+{
+name:"HEX BLADE",
+need:"Root / Virtual",
+options:["15K - 1 Day","50K - 7 Day","100K - 14 Day","140K - 30 Day"]
+},
+{
+name:"BLOODSTRIKE APKMOD",
+need:"No Root",
+options:["20K - 1 Day","50K - 7 Day","100K - 14 Day","130K - 30 Day"]
+},
+{
+name:"BLOODSTRIKE LIXYNSO",
+need:"No Root",
+options:["40K - 7 Day","70K - 14 Day","120K - 30 Day"]
+}
+];
+
+const container = document.getElementById("productContainer");
+
+products.forEach((product, index)=>{
+let card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<h2>${product.name}</h2>
+<p><b>Needed:</b> ${product.need}</p>
+`;
+
+product.options.forEach(opt=>{
+let div=document.createElement("div");
+div.className="option";
+div.innerHTML=`
+${opt}
+<br>
+<button onclick="order('${product.name}','${product.need}','${opt}')">
+Order via WhatsApp
+</button>
+`;
+card.appendChild(div);
+});
+
+container.appendChild(card);
+
+setTimeout(()=>{
+card.classList.add("show");
+}, index * 150);
+});
+
+function order(name,need,price){
+let pesan=`Beli cheat bg (${need}) ${name} ${price}`;
+let url=`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>
