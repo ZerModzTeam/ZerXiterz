@@ -1,49 +1,51 @@
-:root { --p: #00d2ff; --bg: #000; --card: #0a0a0c; }
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+:root { --p: #00d2ff; --bg: #000; --card-bg: #0d0d0f; }
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    font-family: sans-serif;
+    -webkit-tap-highlight-color: transparent; /* MATIIN BIRU GOOGLE */
+}
 body { background: var(--bg); color: #fff; overflow-x: hidden; }
-#star-canvas { position: fixed; top:0; left:0; z-index:-1; }
+#star-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 
-/* Navbar */
-nav { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--p); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top:0; z-index:100; }
-.logo { font-size: 22px; font-weight: 800; color:#fff; }
-.logo span { color: var(--p); text-shadow: 0 0 10px var(--p); }
+nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid var(--p); background: rgba(0,0,0,0.9); position: sticky; top: 0; z-index: 1000; }
+.logo { font-size: 20px; font-weight: 800; }
+.logo span { color: var(--p); text-shadow: 0 0 15px var(--p); }
 .menu-btn { font-size: 24px; color: var(--p); cursor: pointer; }
 
-/* Sidebar & Tombol Exit Custom */
-.sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: #080808; z-index: 2000; padding: 25px; transition: 0.3s; border-left: 1px solid var(--p); }
+.sidebar { position: fixed; top: 0; right: -100%; width: 310px; height: 100%; background: #080808; z-index: 2000; padding: 25px; transition: 0.4s; border-left: 2px solid var(--p); }
 .sidebar.active { right: 0; }
-.btn-exit-custom { width: 35px; height: 35px; background: #222; border: 1.5px solid #fff; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.side-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.btn-exit-custom { width: 38px; height: 38px; background: #333; border: 2px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; }
 
-/* Category Grid (Sesuai Screenshot lo) */
-.category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-.cat-item { background: var(--card); border: 2px solid #222; border-radius: 20px; padding: 30px 10px; text-align: center; cursor: pointer; transition: 0.3s; }
-.cat-item i { font-size: 40px; color: var(--p); margin-bottom: 15px; }
-.cat-item p { font-weight: bold; letter-spacing: 1px; }
-.cat-item.active { border-color: var(--p); box-shadow: 0 0 15px rgba(0,210,255,0.3); }
+.side-item { display: flex; align-items: center; gap: 15px; padding: 14px; background: #111; border-radius: 12px; margin-bottom: 10px; text-decoration: none; color: #fff; border: 1px solid #222; font-size: 14px; }
+.side-item i { font-size: 18px; color: var(--p); width: 25px; text-align: center; }
+.side-label { font-size: 10px; color: #444; margin: 20px 0 10px; font-weight: 800; text-transform: uppercase; }
+.cs-btn { border-color: var(--p); }
 
-/* Search Box */
-.search-box { padding: 20px 20px 0; }
-.search-box input { width: 100%; padding: 15px 25px; border-radius: 30px; background: #111; border: 1px solid #333; color: #fff; outline: none; }
+.main-body { padding: 20px; }
+.search-wrapper input { width: 100%; padding: 14px 20px; border-radius: 30px; background: #111; border: 1.5px solid #222; color: #fff; outline: none; margin-bottom: 20px; }
 
-/* Sub Kategori */
-.sub-wrapper { display: flex; gap: 10px; padding: 0 20px 20px; overflow-x: auto; justify-content: center; }
-.sub-btn { padding: 8px 18px; background: #111; border-radius: 20px; font-size: 13px; border: 1px solid #222; white-space: nowrap; }
+.main-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.cat-box { background: var(--card-bg); border: 2.5px solid #222; border-radius: 20px; padding: 30px 10px; text-align: center; cursor: pointer; }
+.cat-box i { font-size: 40px; color: var(--p); margin-bottom: 12px; }
+.cat-box.active { border-color: var(--p); box-shadow: 0 0 15px rgba(0,210,255,0.3); }
+
+.sub-pill-container { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
+.sub-btn { padding: 7px 15px; background: #111; border-radius: 20px; font-size: 12px; border: 1.2px solid #222; cursor: pointer; }
 .sub-btn.active { border-color: var(--p); color: var(--p); }
 
-/* Card Produk */
-.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 0 20px 100px; }
-.card { background: var(--card); border: 1px solid #222; border-radius: 15px; padding: 20px; }
-.btn-glow { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--p); color: #000; font-weight: bold; cursor: pointer; }
+.product-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+.card { background: var(--card-bg); padding: 20px; border-radius: 18px; border: 1.2px solid #222; }
+.wa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px; }
+.btn-wa { padding: 10px; border-radius: 8px; text-decoration: none; text-align: center; color: #fff; font-size: 13px; font-weight: bold; }
 
-/* Admin UI */
-.admin-ui { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; padding: 20px; overflow-y: auto; }
-.form-group input, .form-group select { width: 100%; padding: 12px; margin-bottom: 10px; background: #111; border: 1px solid #333; color: #fff; border-radius: 8px; }
-.manage-list { margin-top: 20px; }
-.adm-item { background: #111; padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; border: 1px solid #222; }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; text-align: center; }
+.modal-box { background: #000; padding: 30px; border-radius: 20px; border: 2px solid var(--p); width: 90%; max-width: 350px; }
+.modal-box input { width: 100%; padding: 12px; background: #111; border: 1px solid #333; color: #fff; border-radius: 8px; margin-bottom: 10px; }
 
-/* Overlay & Animasi */
-.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 5000; display: none; align-items: center; justify-content: center; text-align: center; }
-.spinner { width: 50px; height: 50px; border: 4px solid #222; border-top-color: var(--p); border-radius: 50%; animation: rot 1s linear infinite; margin: 0 auto; }
-@keyframes rot { to { transform: rotate(360deg); } }
-.check-anim { font-size: 60px; color: #00ff88; animation: pop 0.4s ease; }
-@keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+.admin-panel { position: fixed; inset: 0; background: #000; z-index: 4000; display: none; padding: 20px; overflow-y: auto; }
+.btn-cyan { width: 100%; padding: 12px; background: var(--p); color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
+
+.loader-circle { width: 45px; height: 45px; border: 4px solid #111; border-top-color: var(--p); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.check-mark { font-size: 55px; color: #00ff88; }

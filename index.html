@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZERMODZ TEAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZERMODZ TEAM | V27</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -17,68 +17,97 @@
 
     <div class="sidebar" id="sidebar">
         <div class="side-header">
-            <h3>MENU</h3>
+            <h3>NAVIGASI</h3>
             <div class="btn-exit-custom" onclick="toggleSide()"><i class="fas fa-times"></i></div>
         </div>
-        <div class="side-link" onclick="openLogin()"><i class="fas fa-lock"></i> Admin Panel</div>
+        
+        <div class="side-item main-btn" onclick="openLogin()">
+            <i class="fas fa-lock"></i> <span>Admin Panel</span>
+        </div>
+        
         <p class="side-label">SOCIAL MEDIA</p>
-        <a href="https://tiktok.com/@zaraxitnd" target="_blank" class="side-link"><i class="fab fa-tiktok"></i> TikTok</a>
-        <a href="https://youtube.com/@csrvipx_ofc1" target="_blank" class="side-link"><i class="fab fa-youtube"></i> YouTube</a>
-        <p class="side-label">CUSTOMER SERVICE</p>
-        <a href="https://chat.whatsapp.com/LpxmG92N9u1D8m7XjLhPzB" target="_blank" class="side-link" style="background:#25d366;color:#000;"><i class="fab fa-whatsapp"></i> Hubungi CS</a>
+        <a href="https://tiktok.com/@zaraxitnd" target="_blank" class="side-item">
+            <i class="fab fa-tiktok"></i> <span>TikTok</span>
+        </a>
+        <a href="https://youtube.com/@csrvipx_ofc1" target="_blank" class="side-item">
+            <i class="fab fa-youtube"></i> <span>YouTube Utama</span>
+        </a>
+        <a href="https://youtube.com/@ZMTEAM0" target="_blank" class="side-item">
+            <i class="fab fa-youtube"></i> <span>YouTube Second</span>
+        </a>
+        <a href="https://www.instagram.com/zeroxit44" target="_blank" class="side-item">
+            <i class="fab fa-instagram"></i> <span>Instagram</span>
+        </a>
+        
+        <p class="side-label">CS</p>
+        <a href="https://chat.whatsapp.com/JBW6fNk5KwiGRWCaPVmr8T" target="_blank" class="side-item cs-btn">
+            <i class="fas fa-headset"></i> <span>CS ZERMODZ</span>
+        </a>
     </div>
 
-    <div class="container">
-        <div class="search-box">
-            <input type="text" id="search" placeholder="Cari nama produk..." onkeyup="load()">
+    <div class="main-body">
+        <div class="search-wrapper">
+            <input type="text" id="search" placeholder="Cari cheat kamu..." onkeyup="load()">
         </div>
 
-        <div class="category-grid">
-            <div class="cat-item active" id="c-apk" onclick="changeM('APK')">
+        <div class="main-cat-grid">
+            <div class="cat-box active" id="c-apk" onclick="changeM('APK')">
                 <i class="fab fa-android"></i>
                 <p>APK MOD</p>
             </div>
-            <div class="cat-item" id="c-file" onclick="changeM('FILE')">
+            <div class="cat-box" id="c-file" onclick="changeM('FILE')">
                 <i class="fas fa-file-zipper"></i>
                 <p>FILES</p>
             </div>
         </div>
 
-        <div id="sub-container" class="sub-wrapper"></div>
-
-        <div class="product-grid" id="list"></div>
+        <div id="sub-container" class="sub-pill-container"></div>
+        <div class="product-container" id="list"></div>
     </div>
 
     <div id="overlay-action" class="overlay">
-        <div class="box-modal" id="login-form" style="display:none;">
-            <h3>ADMIN LOGIN</h3>
-            <input type="text" id="adm-u" placeholder="Username">
-            <input type="password" id="adm-p" placeholder="Password">
-            <button onclick="auth()" class="btn-glow">LOGIN</button>
-            <p onclick="closeOverlay()" style="margin-top:15px; cursor:pointer; color:#777;">Batal</p>
+        <div class="modal-box" id="login-form" style="display:none;">
+            <div class="modal-icon"><i class="fas fa-user-lock"></i></div>
+            <h2>ADMIN LOGIN</h2>
+            <div class="input-group">
+                <input type="text" id="adm-u" placeholder="USERNAME">
+                <input type="password" id="adm-p" placeholder="PASSWORD">
+            </div>
+            <button onclick="auth()" class="btn-cyan">SIGN IN</button>
+            <p onclick="closeOverlay()" class="btn-cancel-text">Batal</p>
         </div>
+
         <div id="status-ui" style="display:none;">
-            <div class="spinner"></div>
-            <div id="l-success" class="check-anim" style="display:none;"><i class="fas fa-check-circle"></i></div>
-            <h2 id="l-text">WAIT...</h2>
+            <div class="loader-circle"></div>
+            <div id="l-success" class="check-mark" style="display:none;"><i class="fas fa-check-circle"></i></div>
+            <h2 id="l-text" style="color:#fff; margin-top:15px;">PROCESSING...</h2>
         </div>
     </div>
 
-    <div id="admin-panel" class="admin-ui">
-        <div class="admin-top">
-            <h2 id="adm-title">ADD PRODUCT</h2>
+    <div id="admin-panel" class="admin-panel">
+        <div class="admin-header">
+            <h2 id="adm-title">DASHBOARD</h2>
             <div class="btn-exit-custom" onclick="exitAdmin()"><i class="fas fa-times"></i></div>
         </div>
-        <div class="form-group">
+        <div class="admin-content">
             <input type="hidden" id="p-id">
-            <input type="text" id="p-name" placeholder="Nama Produk">
-            <input type="number" id="p-dur" placeholder="Durasi (Hari)">
+            <input type="text" id="p-name" placeholder="Nama Cheat">
             <input type="number" id="p-price" placeholder="Harga (K)">
+            <input type="number" id="p-dur" placeholder="Durasi (Day)">
+            
+            <div class="cat-selector">
+                <button onclick="setADM('APK')" id="adm-apk" class="active">APK</button>
+                <button onclick="setADM('FILE')" id="adm-file">FILE</button>
+            </div>
+            
             <select id="p-sub"></select>
-            <button onclick="save()" id="btn-save" class="btn-glow">PUBLISH</button>
-            <button onclick="cancelEdit()" id="btn-cancel" style="display:none;background:#333;">BATAL EDIT</button>
+            
+            <button onclick="save()" id="btn-save" class="btn-cyan">PUBLISH PRODUCT</button>
+            <button onclick="cancelEdit()" id="btn-cancel" style="display:none; margin-top:10px; background:#222;">BATAL EDIT</button>
+
+            <div class="manage-header">MANAGE PRODUCTS</div>
+            <div id="adm-list"></div>
         </div>
-        <div id="adm-list" class="manage-list"></div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
