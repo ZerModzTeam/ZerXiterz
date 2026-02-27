@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZerModzTeam | Store</title>
+    <title>ZERMODZ TEAM | V27 UI REBORN</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -24,7 +24,7 @@
             <div class="loader" id="l-spin"></div>
             <div id="l-success" class="success-icon" style="display:none;"><i class="fas fa-check-circle"></i></div>
             <div id="l-error" class="error-icon" style="display:none;"><i class="fas fa-times-circle"></i></div>
-            <h2 id="l-text" style="margin-top:20px; color:#fff; letter-spacing: 2px;">WAIT...</h2>
+            <h2 id="l-text" style="margin-top:20px; color:#fff;">WAIT...</h2>
         </div>
     </div>
 
@@ -45,8 +45,7 @@
         <a href="https://youtube.com/@csrvipx_ofc1" target="_blank" class="side-link"><i class="fab fa-youtube"></i> YouTube</a>
         <a href="https://www.instagram.com/zeroxit44" target="_blank" class="side-link"><i class="fab fa-instagram"></i> Instagram</a>
         
-        <p class="side-label">CUSTOMER SERVICE (CS)</p>
-        <a href="https://chat.whatsapp.com/LpxmG92N9u1D8m7XjLhPzB" target="_blank" class="side-link" style="background: #25d366; color: #000;"><i class="fab fa-whatsapp"></i> GRUP WA CS</a>
+        <p class="side-label">CUSTOMER SERVICE</p> <a href="https://chat.whatsapp.com/LpxmG92N9u1D8m7XjLhPzB" target="_blank" class="side-link" style="background: #25d366; color: #000;"><i class="fab fa-whatsapp"></i> HUBUNGI CS (GRUP)</a>
     </div>
 
     <div class="search-container">
@@ -69,8 +68,8 @@
         <div class="admin-box">
             <input type="hidden" id="p-id">
             <input type="text" id="p-name" placeholder="Nama Produk">
-            <input type="number" id="p-dur" placeholder="Input Day (Bebas)">
-            <input type="number" id="p-price" placeholder="Input Harga K (Bebas)">
+            <input type="number" id="p-dur" placeholder="Berapa Hari? (Contoh: 30)">
+            <input type="number" id="p-price" placeholder="Harga Berapa K? (Contoh: 50)">
             <div class="admin-cat-sel">
                 <button onclick="setADM('APK')" id="adm-apk">APK</button>
                 <button onclick="setADM('FILE')" id="adm-file">FILE</button>
@@ -79,7 +78,7 @@
             <button onclick="save()" id="btn-save" class="btn-publish">PUBLISH PRODUCT</button>
             <button onclick="cancelEdit()" id="btn-cancel" style="display:none; margin-top:10px; background:#444; color:#fff;" class="btn-publish">BATAL EDIT</button>
         </div>
-        <h3 style="margin: 30px 0 10px; color: var(--p); border-left: 3px solid var(--p); padding-left: 10px;">MANAGE PRODUCTS</h3>
+        <h3 style="margin: 30px 0 10px; color: var(--p); border-left: 3px solid var(--p); padding-left:10px;">MANAGE PRODUCTS</h3>
         <div id="adm-list"></div>
     </div>
 

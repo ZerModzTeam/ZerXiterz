@@ -42,7 +42,7 @@ function showStatus(type, msg, callback) {
     }
 }
 
-// EDIT & SAVE
+// SAVE & EDIT
 function save() {
     const id = document.getElementById('p-id').value;
     const n = document.getElementById('p-name').value, d = document.getElementById('p-dur').value, p = document.getElementById('p-price').value, s = document.getElementById('p-sub').value;
@@ -85,7 +85,7 @@ function cancelEdit() {
     document.getElementById('p-name').value=''; document.getElementById('p-dur').value=''; document.getElementById('p-price').value='';
 }
 
-// LOAD & DISPLAY
+// LOAD PRODUCTS
 function load() {
     db.ref('products').on('value', snap => {
         const list = document.getElementById('list'), admList = document.getElementById('adm-list'), q = document.getElementById('search').value.toLowerCase();
@@ -93,18 +93,18 @@ function load() {
         snap.forEach(c => {
             const i = c.val(), k = c.key;
             if(i.main === curM && (curS === 'ALL' || i.sub === curS) && i.name.toLowerCase().includes(q)) {
-                const msg = encodeURIComponent(`Order: ${i.name}\nDurasi: ${i.dur} Day\nHarga: ${i.price}K`);
+                const msg = encodeURIComponent(`Halo Zermodz,\nOrder: ${i.name}\nDurasi: ${i.dur} Day\nHarga: ${i.price}K`);
                 list.innerHTML += `<div class="card"><h3>${i.name}</h3><p>${i.dur} Day | <span style="color:var(--p)">${i.price}K</span></p>
                 <a href="https://wa.me/6289653938936?text=${msg}" target="_blank" class="btn-wa wa1">BUY VIA WA 1</a>
                 <a href="https://wa.me/6285721057014?text=${msg}" target="_blank" class="btn-wa wa2">BUY VIA WA 2</a></div>`;
             }
-            admList.innerHTML += `<div class="adm-item"><span class="adm-name" onclick="editMode('${k}')">${i.name}</span>
-            <button onclick="db.ref('products/${k}').remove()" style="color:red; background:none; border:none; font-weight:bold;">HAPUS</button></div>`;
+            admList.innerHTML += `<div class="adm-item"><span style="cursor:pointer; color:var(--p); font-weight:bold;" onclick="editMode('${k}')">${i.name}</span>
+            <button onclick="db.ref('products/${k}').remove()" style="color:red; background:none; border:none; font-weight:bold; cursor:pointer;">HAPUS</button></div>`;
         });
     });
 }
 
-// UI HELPERS
+// UI LOGIC
 function changeM(m) { curM = m; curS = 'ALL'; renderSub(); load(); }
 function renderSub() {
     document.getElementById('c-apk').className = curM === 'APK' ? 'cat-card active' : 'cat-card';
@@ -127,7 +127,7 @@ function setADM(m) {
     subData[m].forEach(s => sel.innerHTML += `<option value="${s}">${s}</option>`);
 }
 
-// STARS
+// STARS BACKGROUND
 const cvs = document.getElementById('star-canvas');
 const ctx = cvs.getContext('2d');
 function res() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; }
