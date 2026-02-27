@@ -1,43 +1,49 @@
-:root { --p: #00d2ff; --bg: #020204; --card: #0f0f12; --success: #00ff88; }
-* { margin:0; padding:0; box-sizing:border-box; font-family: sans-serif; }
-body { background: var(--bg); color: #fff; }
-#star-canvas { position: fixed; inset: 0; z-index: -1; }
+:root { --p: #00d2ff; --bg: #000; --card: #0a0a0c; }
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: var(--bg); color: #fff; overflow-x: hidden; }
+#star-canvas { position: fixed; top:0; left:0; z-index:-1; }
 
-nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: #000; border-bottom: 2px solid var(--p); position: sticky; top:0; z-index: 1000; }
-.logo { font-size: 20px; font-weight: bold; }
-.logo span { color: var(--p); }
+/* Navbar */
+nav { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--p); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top:0; z-index:100; }
+.logo { font-size: 22px; font-weight: 800; color:#fff; }
+.logo span { color: var(--p); text-shadow: 0 0 10px var(--p); }
+.menu-btn { font-size: 24px; color: var(--p); cursor: pointer; }
 
-.sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: #0a0a0c; z-index: 2000; padding: 25px; transition: 0.4s; border-left: 2px solid var(--p); }
+/* Sidebar & Tombol Exit Custom */
+.sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: #080808; z-index: 2000; padding: 25px; transition: 0.3s; border-left: 1px solid var(--p); }
 .sidebar.active { right: 0; }
-.btn-exit-custom { width: 35px; height: 35px; background: #333; color: #fff; border: 1px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.btn-exit-custom { width: 35px; height: 35px; background: #222; border: 1.5px solid #fff; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
-.side-link { display: block; padding: 12px; background: #16161a; color: #fff; text-decoration: none; border-radius: 8px; margin-bottom: 8px; font-size: 14px; }
-.side-label { font-size: 10px; color: #555; margin: 15px 0 5px; text-transform: uppercase; }
+/* Category Grid (Sesuai Screenshot lo) */
+.category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+.cat-item { background: var(--card); border: 2px solid #222; border-radius: 20px; padding: 30px 10px; text-align: center; cursor: pointer; transition: 0.3s; }
+.cat-item i { font-size: 40px; color: var(--p); margin-bottom: 15px; }
+.cat-item p { font-weight: bold; letter-spacing: 1px; }
+.cat-item.active { border-color: var(--p); box-shadow: 0 0 15px rgba(0,210,255,0.3); }
 
-.search-container { padding: 20px 5%; }
-.search-bar { width: 100%; padding: 12px 20px; border-radius: 25px; background: #16161a; border: 1px solid #333; color: #fff; }
+/* Search Box */
+.search-box { padding: 20px 20px 0; }
+.search-box input { width: 100%; padding: 15px 25px; border-radius: 30px; background: #111; border: 1px solid #333; color: #fff; outline: none; }
 
-.cats { display: flex; gap: 10px; padding: 0 5% 20px; justify-content: center; }
-.cat-card { background: var(--card); padding: 15px; border-radius: 15px; text-align: center; width: 100px; border: 1px solid #222; cursor: pointer; }
-.cat-card.active { border-color: var(--p); background: rgba(0,210,255,0.1); }
-
-#sub-container { display: flex; gap: 8px; justify-content: center; padding-bottom: 20px; flex-wrap: wrap; }
-.sub-btn { padding: 8px 15px; background: #16161a; border-radius: 20px; font-size: 12px; border: 1px solid #333; cursor: pointer; }
+/* Sub Kategori */
+.sub-wrapper { display: flex; gap: 10px; padding: 0 20px 20px; overflow-x: auto; justify-content: center; }
+.sub-btn { padding: 8px 18px; background: #111; border-radius: 20px; font-size: 13px; border: 1px solid #222; white-space: nowrap; }
 .sub-btn.active { border-color: var(--p); color: var(--p); }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 0 5% 50px; }
-.card { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #222; }
-.btn-wa { display: block; padding: 10px; border-radius: 8px; text-decoration: none; text-align: center; color: #fff; font-weight: bold; margin-top: 8px; }
+/* Card Produk */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 0 20px 100px; }
+.card { background: var(--card); border: 1px solid #222; border-radius: 15px; padding: 20px; }
+.btn-glow { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--p); color: #000; font-weight: bold; cursor: pointer; }
 
+/* Admin UI */
+.admin-ui { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; padding: 20px; overflow-y: auto; }
+.form-group input, .form-group select { width: 100%; padding: 12px; margin-bottom: 10px; background: #111; border: 1px solid #333; color: #fff; border-radius: 8px; }
+.manage-list { margin-top: 20px; }
+.adm-item { background: #111; padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; border: 1px solid #222; }
+
+/* Overlay & Animasi */
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 5000; display: none; align-items: center; justify-content: center; text-align: center; }
-.box { background: #000; padding: 30px; border-radius: 20px; border: 1px solid var(--p); width: 90%; max-width: 350px; }
-.box input { width: 100%; padding: 12px; margin: 10px 0; background: #111; border: 1px solid #333; color: #fff; border-radius: 8px; }
-
-.loader { width: 50px; height: 50px; border: 4px solid #222; border-top-color: var(--p); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.success-icon { font-size: 60px; color: var(--success); }
-
-.admin-full { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; padding: 20px; overflow-y: auto; }
-.admin-form input, .admin-form select { width: 100%; padding: 12px; margin-bottom: 10px; background: #111; border: 1px solid #333; color: #fff; border-radius: 8px; }
-.btn-publish { width: 100%; padding: 12px; background: var(--p); border: none; font-weight: bold; border-radius: 8px; }
-.adm-item { background: #111; padding: 12px; margin-top: 8px; border-radius: 8px; display: flex; justify-content: space-between; border: 1px solid #222; }
+.spinner { width: 50px; height: 50px; border: 4px solid #222; border-top-color: var(--p); border-radius: 50%; animation: rot 1s linear infinite; margin: 0 auto; }
+@keyframes rot { to { transform: rotate(360deg); } }
+.check-anim { font-size: 60px; color: #00ff88; animation: pop 0.4s ease; }
+@keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
