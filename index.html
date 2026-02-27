@@ -47,23 +47,23 @@
         </div>
 
         <div id="sub-container" class="sub-pill-container"></div>
+        
         <div class="product-container" id="list"></div>
     </div>
 
     <div id="overlay-action" class="overlay">
         <div class="modal-box" id="login-form" style="display:none;">
-            <div class="modal-icon"><i class="fas fa-user-lock" style="font-size: 40px; color: #00d2ff; margin-bottom: 15px;"></i></div>
+            <div class="modal-icon"><i class="fas fa-user-lock"></i></div>
             <h2>ADMIN LOGIN</h2>
             <input type="text" id="adm-u" placeholder="USERNAME">
             <input type="password" id="adm-p" placeholder="PASSWORD">
             <button onclick="auth()" class="btn-cyan">SIGN IN</button>
-            <p onclick="closeOverlay()" style="color:#666; cursor:pointer; margin-top:15px; font-size:13px;">Batal</p>
+            <p onclick="closeOverlay()" class="btn-cancel-text">Batal</p>
         </div>
-
         <div id="status-ui" style="display:none;">
             <div class="loader-circle"></div>
             <div id="l-success" class="check-mark" style="display:none;"><i class="fas fa-check-circle"></i></div>
-            <h2 id="l-text" style="color:#fff; margin-top:15px; font-size:18px;">PROCESSING...</h2>
+            <h2 id="l-text">WAIT...</h2>
         </div>
     </div>
 
@@ -86,12 +86,9 @@
             <select id="p-sub"></select>
             
             <button onclick="save()" id="btn-save" class="btn-cyan">PUBLISH PRODUCT</button>
-            <button onclick="cancelEdit()" id="btn-cancel" style="display:none; margin-top:10px; background:#222; border:none; color:white; padding:12px; border-radius:8px; width:100%;">BATAL EDIT</button>
+            <button onclick="cancelEdit()" id="btn-cancel" style="display:none;">BATAL EDIT</button>
 
-            <div style="margin-top:25px; border-top:1px solid #222; padding-top:15px;">
-                <h3 style="font-size:14px; color:#555; margin-bottom:15px;">MANAGE PRODUCTS</h3>
-                <div id="adm-list"></div>
-            </div>
+            <div id="adm-list" style="margin-top:20px;"></div>
         </div>
     </div>
 
