@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZERMODZ TEAM | V27 UI REBORN</title>
+    <title>ZerModzTeam | Store</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -20,16 +20,11 @@
             <p onclick="closeOverlay()" style="margin-top:20px; cursor:pointer; color:gray;">Batal</p>
         </div>
 
-        <div class="loader-wrap" id="status-ui" style="display:none; text-align: center;">
+        <div id="status-ui" style="display:none; text-align: center;">
             <div class="loader" id="l-spin"></div>
-            <div id="l-success" class="success-checkmark">
-                <svg class="checkmark" viewBox="0 0 52 52">
-                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                </svg>
-            </div>
-            <div id="l-error" style="display:none; color:var(--error); font-size:60px;"><i class="fas fa-times-circle"></i></div>
-            <h2 id="l-text" style="margin-top:20px; color:#fff;">WAIT...</h2>
+            <div id="l-success" class="success-icon" style="display:none;"><i class="fas fa-check-circle"></i></div>
+            <div id="l-error" class="error-icon" style="display:none;"><i class="fas fa-times-circle"></i></div>
+            <h2 id="l-text" style="margin-top:20px; color:#fff; letter-spacing: 2px;">WAIT...</h2>
         </div>
     </div>
 
@@ -40,18 +35,18 @@
 
     <div class="sidebar" id="sidebar">
         <div class="side-header">
-            <h3>DASHBOARD</h3>
-            <i class="fas fa-times" onclick="toggleSide()"></i>
+            <h3>MENU</h3>
+            <div class="btn-exit-custom" onclick="toggleSide()"><i class="fas fa-times"></i></div>
         </div>
         <div class="side-link" onclick="openLogin()"><i class="fas fa-lock"></i> Admin Panel</div>
         
         <p class="side-label">SOCIAL MEDIA</p>
         <a href="https://tiktok.com/@zaraxitnd" target="_blank" class="side-link"><i class="fab fa-tiktok"></i> TikTok</a>
-        <a href="https://youtube.com/@csrvipx_ofc1" target="_blank" class="side-link"><i class="fab fa-youtube"></i> YouTube 1</a>
+        <a href="https://youtube.com/@csrvipx_ofc1" target="_blank" class="side-link"><i class="fab fa-youtube"></i> YouTube</a>
         <a href="https://www.instagram.com/zeroxit44" target="_blank" class="side-link"><i class="fab fa-instagram"></i> Instagram</a>
         
-        <p class="side-label">COMMUNITY</p>
-        <a href="https://chat.whatsapp.com/LpxmG92N9u1D8m7XjLhPzB" target="_blank" class="side-link" style="background:#25d366; color:#000;"><i class="fab fa-whatsapp"></i> GRUP WHATSAPP</a>
+        <p class="side-label">CUSTOMER SERVICE (CS)</p>
+        <a href="https://chat.whatsapp.com/LpxmG92N9u1D8m7XjLhPzB" target="_blank" class="side-link" style="background: #25d366; color: #000;"><i class="fab fa-whatsapp"></i> GRUP WA CS</a>
     </div>
 
     <div class="search-container">
@@ -66,22 +61,25 @@
     <div id="sub-container"></div>
     <div class="grid" id="list"></div>
 
-    <div id="admin-panel" style="display:none;">
+    <div id="admin-panel" class="admin-full">
         <div class="admin-header">
-            <h1>MODERATION</h1>
-            <button class="btn-exit" onclick="exitAdmin()">X</button>
+            <h1 id="adm-title">ADD PRODUCT</h1>
+            <div class="btn-exit-custom" onclick="exitAdmin()"><i class="fas fa-times"></i></div>
         </div>
         <div class="admin-box">
+            <input type="hidden" id="p-id">
             <input type="text" id="p-name" placeholder="Nama Produk">
-            <input type="number" id="p-dur" placeholder="Durasi (Contoh: 30)">
-            <input type="number" id="p-price" placeholder="Harga (Contoh: 50)">
+            <input type="number" id="p-dur" placeholder="Input Day (Bebas)">
+            <input type="number" id="p-price" placeholder="Input Harga K (Bebas)">
             <div class="admin-cat-sel">
                 <button onclick="setADM('APK')" id="adm-apk">APK</button>
                 <button onclick="setADM('FILE')" id="adm-file">FILE</button>
             </div>
             <select id="p-sub"></select>
-            <button onclick="save()" class="btn-publish">UPLOAD PRODUK</button>
+            <button onclick="save()" id="btn-save" class="btn-publish">PUBLISH PRODUCT</button>
+            <button onclick="cancelEdit()" id="btn-cancel" style="display:none; margin-top:10px; background:#444; color:#fff;" class="btn-publish">BATAL EDIT</button>
         </div>
+        <h3 style="margin: 30px 0 10px; color: var(--p); border-left: 3px solid var(--p); padding-left: 10px;">MANAGE PRODUCTS</h3>
         <div id="adm-list"></div>
     </div>
 
