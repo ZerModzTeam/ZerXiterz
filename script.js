@@ -31,15 +31,48 @@ function auth() {
         const d = snap.val();
         if(d && u === d.user && p === d.pass) {
             setTimeout(() => { closeOverlay(); document.getElementById('admin-panel').style.display = 'block'; load(); }, 1000);
-        } else { alert("WRONG!"); closeOverlay(); }
+        } else { alert("ACCESS DENIED"); closeOverlay(); }
     });
 }
 
+function updateSubAdmin() {
+    const m = document.getElementById('p-main-cat').value;
+    const s = document.getElementById('p-sub-cat'); s.innerHTML = '';
+    subDataAdmin[m].forEach(x => s.innerHTML += `<option value="${x}">${x}</option>`);
+}
+
 function save() {
-    const n = document.getElementById('p-name').value, d = document.getElementById('p-dur').value, p = document.getElementById('p-price').value, s = document.getElementById('p-sub').value;
-    if(n && d && p) {
-        db.ref('products').push({ name:n, dur:d, price:p, main:curM, sub:s }).then(() => { alert("Success!"); load(); });
+    const id = document.getElementById('p-id').value;
+    const n = document.getElementById('p-name').value;
+    const m = document.getElementById('p-main-cat').value;
+    const s = document.getElementById('p-sub-cat').value;
+    const v = document.getElementById('p-variants').value;
+    if(n && v) {
+        const ref = id ? db.ref('products/'+id) : db.ref('products');
+        ref.set({ name:n, main:m, sub:s, variants:v }).then(() => { cancelEdit(); load(); });
     }
+}
+
+function editMode(id) {
+    db.ref('products/'+id).once('value').then(snap => {
+        const i = snap.val();
+        document.getElementById('p-id').value = id;
+        document.getElementById('p-name').value = i.name;
+        document.getElementById('p-main-cat').value = i.main;
+        updateSubAdmin();
+        document.getElementById('p-sub-cat').value = i.sub;
+        document.getElementById('p-variants').value = i.variants;
+        document.getElementById('btn-save').innerText = "UPDATE DATA";
+        document.getElementById('btn-cancel').style.display = "block";
+    });
+}
+
+function cancelEdit() {
+    document.getElementById('p-id').value = '';
+    document.getElementById('p-name').value = '';
+    document.getElementById('p-variants').value = '';
+    document.getElementById('btn-save').innerText = "PUBLISH DATA";
+    document.getElementById('btn-cancel').style.display = "none";
 }
 
 function load() {
@@ -48,20 +81,29 @@ function load() {
         list.innerHTML = ''; adm.innerHTML = '';
         snap.forEach(c => {
             const i = c.val(), k = c.key;
+            adm.innerHTML += `<div class="adm-card">
+                <div><b>${i.name}</b><p style="font-size:10px;color:#444">${i.sub}</p></div>
+                <div style="display:flex;gap:15px">
+                    <i class="fas fa-edit" style="color:orange" onclick="editMode('${k}')"></i>
+                    <i class="fas fa-trash" style="color:red" onclick="if(confirm('Hapus?')) db.ref('products/${k}').remove()"></i>
+                </div>
+            </div>`;
             if(i.main === curM && (curS === 'ALL' || i.sub === curS) && i.name.toLowerCase().includes(q)) {
-                const msg = encodeURIComponent(`Order: ${i.name}\nHarga: ${i.price}K`);
+                let vH = '';
+                i.variants.split(',').forEach(x => {
+                    const [d, p] = x.trim().split('-');
+                    vH += `<div class="v-item"><span>${d} Hari</span><span>Rp ${p}.000</span></div>`;
+                });
+                const msg = encodeURIComponent(`Halo Admin, order:\n${i.name}\nDetail:\n${i.variants}`);
                 list.innerHTML += `<div class="card">
                     <h3 style="color:var(--p)">${i.name}</h3>
-                    <p style="color:#555; font-size:13px; margin:5px 0 15px;">${i.dur} Day | Rp ${i.price}.000</p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <a href="https://wa.me/${WA_1}?text=${msg}" target="_blank" style="background:#25d366; padding:10px; border-radius:8px; text-align:center; color:white; text-decoration:none; font-weight:bold;">WA 1</a>
-                        <a href="https://wa.me/${WA_2}?text=${msg}" target="_blank" style="background:#128c7e; padding:10px; border-radius:8px; text-align:center; color:white; text-decoration:none; font-weight:bold;">WA 2</a>
+                    <div class="variant-list">${vH}</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                        <a href="https://wa.me/${WA_1}?text=${msg}" target="_blank" style="background:#25d366;padding:12px;border-radius:10px;text-align:center;color:white;text-decoration:none;font-weight:bold;">WA 1</a>
+                        <a href="https://wa.me/${WA_2}?text=${msg}" target="_blank" style="background:#128c7e;padding:12px;border-radius:10px;text-align:center;color:white;text-decoration:none;font-weight:bold;">WA 2</a>
                     </div>
                 </div>`;
             }
-            adm.innerHTML += `<div style="background:#111; padding:15px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; border:1px solid #222;">
-                <span>${i.name}</span><i class="fas fa-trash" onclick="db.ref('products/${k}').remove()" style="color:red; cursor:pointer"></i>
-            </div>`;
         });
     });
 }
@@ -70,15 +112,11 @@ function changeM(m) { curM = m; curS = 'ALL'; renderSub(); load(); }
 function renderSub() {
     document.getElementById('c-apk').classList.toggle('active', curM === 'APK');
     document.getElementById('c-file').classList.toggle('active', curM === 'FILE');
-    const container = document.getElementById('sub-container'); container.innerHTML = '';
+    const c = document.getElementById('sub-container'); c.innerHTML = '';
     subDataDisplay[curM].forEach(s => {
-        const btn = document.createElement('div');
-        btn.className = `sub-btn ${curS === s ? 'active' : ''}`;
-        btn.innerText = s; btn.onclick = () => { curS = s; renderSub(); load(); };
-        container.appendChild(btn);
+        const b = document.createElement('div'); b.className = `sub-btn ${curS === s ? 'active' : ''}`;
+        b.innerText = s; b.onclick = () => { curS = s; renderSub(); load(); }; c.appendChild(b);
     });
-    const sel = document.getElementById('p-sub'); sel.innerHTML = '';
-    subDataAdmin[curM].forEach(s => sel.innerHTML += `<option value="${s}">${s}</option>`);
 }
 
 const cvs = document.getElementById('star-canvas'), ctx = cvs.getContext('2d');
@@ -91,4 +129,4 @@ function draw() {
     requestAnimationFrame(draw);
 }
 draw();
-window.onload = () => { renderSub(); load(); };
+window.onload = () => { updateSubAdmin(); renderSub(); load(); };
