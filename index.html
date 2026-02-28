@@ -26,7 +26,8 @@
         <a href="https://youtube.com/@csrvipx_ofc1" target="_blank" class="side-item"><i class="fab fa-youtube"></i> <span>YouTube Utama</span></a>
         <a href="https://youtube.com/@ZMTEAM0" target="_blank" class="side-item"><i class="fab fa-youtube"></i> <span>YouTube Second</span></a>
         <a href="https://www.instagram.com/zeroxit44" target="_blank" class="side-item"><i class="fab fa-instagram"></i> <span>Instagram</span></a>
-        <p class="side-label">CS</p>
+        <a href="https://whatsapp.com/channel/0029VaG6" target="_blank" class="side-item"><i class="fas fa-bullhorn"></i> <span>Saluran WA</span></a>
+        <p class="side-label">SUPPORT</p>
         <a href="https://chat.whatsapp.com/JBW6fNk5KwiGRWCaPVmr8T" target="_blank" class="side-item cs-btn"><i class="fas fa-headset"></i> <span>CS ZERMODZ</span></a>
     </div>
 
@@ -47,23 +48,21 @@
         </div>
 
         <div id="sub-container" class="sub-pill-container"></div>
-        
         <div class="product-container" id="list"></div>
     </div>
 
     <div id="overlay-action" class="overlay">
         <div class="modal-box" id="login-form" style="display:none;">
-            <div class="modal-icon"><i class="fas fa-user-lock"></i></div>
+            <i class="fas fa-user-lock" style="font-size: 50px; color: var(--p); margin-bottom: 20px;"></i>
             <h2>ADMIN LOGIN</h2>
             <input type="text" id="adm-u" placeholder="USERNAME">
             <input type="password" id="adm-p" placeholder="PASSWORD">
             <button onclick="auth()" class="btn-cyan">SIGN IN</button>
-            <p onclick="closeOverlay()" class="btn-cancel-text">Batal</p>
+            <p onclick="closeOverlay()" style="color:#555; margin-top:20px; cursor:pointer;">Batal</p>
         </div>
         <div id="status-ui" style="display:none;">
             <div class="loader-circle"></div>
-            <div id="l-success" class="check-mark" style="display:none;"><i class="fas fa-check-circle"></i></div>
-            <h2 id="l-text">WAIT...</h2>
+            <h2 id="l-text" style="color:white; margin-top:20px;">WAIT...</h2>
         </div>
     </div>
 
@@ -77,18 +76,9 @@
             <input type="text" id="p-name" placeholder="Nama Cheat">
             <input type="number" id="p-price" placeholder="Harga (K)">
             <input type="number" id="p-dur" placeholder="Durasi (Day)">
-            
-            <div class="cat-selector">
-                <button onclick="setADM('APK')" id="adm-apk" class="active">APK</button>
-                <button onclick="setADM('FILE')" id="adm-file">FILE</button>
-            </div>
-            
             <select id="p-sub"></select>
-            
-            <button onclick="save()" id="btn-save" class="btn-cyan">PUBLISH PRODUCT</button>
-            <button onclick="cancelEdit()" id="btn-cancel" style="display:none;">BATAL EDIT</button>
-
-            <div id="adm-list" style="margin-top:20px;"></div>
+            <button onclick="save()" class="btn-cyan">PUBLISH PRODUCT</button>
+            <div id="adm-list" style="margin-top:25px;"></div>
         </div>
     </div>
 
