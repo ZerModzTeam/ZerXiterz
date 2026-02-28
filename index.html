@@ -54,7 +54,7 @@
     <div id="overlay-action" class="overlay">
         <div class="modal-box" id="login-form" style="display:none;">
             <i class="fas fa-user-lock" style="font-size: 50px; color: var(--p); margin-bottom: 20px;"></i>
-            <h2>ADMIN LOGIN</h2>
+            <h2>ADMIN ACCESS</h2>
             <input type="text" id="adm-u" placeholder="USERNAME">
             <input type="password" id="adm-p" placeholder="PASSWORD">
             <button onclick="auth()" class="btn-cyan">SIGN IN</button>
@@ -68,17 +68,33 @@
 
     <div id="admin-panel" class="admin-panel">
         <div class="admin-header">
-            <h2 id="adm-title">DASHBOARD</h2>
+            <h2><i class="fas fa-terminal"></i> ZM-CONSOLE</h2>
             <div class="btn-exit-custom" onclick="exitAdmin()"><i class="fas fa-times"></i></div>
         </div>
         <div class="admin-content">
-            <input type="hidden" id="p-id">
-            <input type="text" id="p-name" placeholder="Nama Cheat">
-            <input type="number" id="p-price" placeholder="Harga (K)">
-            <input type="number" id="p-dur" placeholder="Durasi (Day)">
-            <select id="p-sub"></select>
-            <button onclick="save()" class="btn-cyan">PUBLISH PRODUCT</button>
-            <div id="adm-list" style="margin-top:25px;"></div>
+            <div class="input-card">
+                <input type="hidden" id="p-id">
+                <p class="input-label">Product Name</p>
+                <input type="text" id="p-name" placeholder="Nama Produk">
+                <div style="display:flex; gap:10px;">
+                    <div style="flex:1">
+                        <p class="input-label">Main Cat</p>
+                        <select id="p-main-cat" onchange="updateSubAdmin()">
+                            <option value="APK">APK MOD</option>
+                            <option value="FILE">FILES</option>
+                        </select>
+                    </div>
+                    <div style="flex:1">
+                        <p class="input-label">Sub Cat</p>
+                        <select id="p-sub-cat"></select>
+                    </div>
+                </div>
+                <p class="input-label">Prices (Format: Day-Price, Day-Price)</p>
+                <textarea id="p-variants" placeholder="1-10, 7-50, 30-150"></textarea>
+                <button onclick="save()" id="btn-save" class="btn-cyan">PUBLISH DATA</button>
+                <button onclick="cancelEdit()" id="btn-cancel" style="display:none; margin-top:10px; background:#222; color:#fff; padding:12px; border-radius:12px; width:100%; border:none;">CANCEL EDIT</button>
+            </div>
+            <div id="adm-list"></div>
         </div>
     </div>
 
